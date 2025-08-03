@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RETELL Drag-and-Drop Game</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f2faff;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .box, .item {
+      border-radius: 10px;
+      padding: 10px;
+      text-align: center;
+    }
+    .box {
+      width: 250px;
+      min-height: 100px;
+      border: 2px dashed #aaa;
+      background-color: #fff;
+    }
+    .item {
+      background-color: #ffe680;
+      border: 1px solid #ccc;
+      margin: 5px;
+      cursor: grab;
+    }
+    .label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎲 RETELL Drag-and-Drop Game</h1>
+
+  <div class="container">
+    <div class="box" id="R" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <div class="label">🧍 R = Remember (Characters)</div>
+    </div>
+    <div class="box" id="E1" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <div class="label">🌳 E = Explain (Setting)</div>
+    </div>
+    <div class="box" id="T" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <div class="label">🚪 T = Tell (Beginning)</div>
+    </div>
+    <div class="box" id="E2" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <div class="label">🛤️ E = Events (Middle)</div>
+    </div>
+    <div class="box" id="L1" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <div class="label">🏁 L = Last (End)</div>
+    </div>
+    <div class="box" id="L2" ondrop="drop(event)" ondragover="allowDrop(event)">
+      <div class="label">💡 L = Lesson (Message)</div>
+    </div>
+  </div>
+
+  <h2 style="text-align: center; margin-top: 40px;">🎯 Drag the correct answers below</h2>
+
+  <div class="container">
+    <div class="item" draggable="true" ondragstart="drag(event)" id="item1">👧 The girl wanted to find her cat.</div>
+    <div class="item" draggable="true" ondragstart="drag(event)" id="item2">🐱 The cat was in the tree.</div>
+    <div class="item" draggable="true" ondragstart="drag(event)" id="item3">🌲 It happened in the park.</div>
+    <div class="item" draggable="true" ondragstart="drag(event)" id="item4">🛶 She looked near the river.</div>
+    <div class="item" draggable="true" ondragstart="drag(event)" id="item5">🏁 She found her cat and took it home.</div>
+    <div class="item" draggable="true" ondragstart="drag(event)" id="item6">💬 Be patient and keep trying.</div>
+    <div class="item" draggable="true" ondragstart="drag(event)" id="item7">🏠 It happened at home.</div>
+    <div class="item" draggable="true" ondragstart="drag(event)" id="item8">👦 The boy helped his sister.</div>
+  </div>
+
+  <script>
+    function allowDrop(ev) {
+      ev.preventDefault();
+    }
+
+    function drag(ev) {
+      ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+      ev.preventDefault();
+      var data = ev.dataTransfer.getData("text");
+      var draggedItem = document.getElementById(data);
+      if (ev.target.classList.contains("box")) {
+        ev.target.appendChild(draggedItem);
+      }
+    }
+  </script>
+</body>
+</html>
